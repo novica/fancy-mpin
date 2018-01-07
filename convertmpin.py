@@ -104,7 +104,7 @@ values_list = ['Реден број',
  'Број на трансакциска сметка']
 
     
-with open('test.txt', newline='\r\n') as csvfile: #don't forget encoding='cp1251'
+with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='cp1251'
     csvreader = csv.reader(csvfile, delimiter=';')
 
     #first three lines contain some genereal info that we need only parts of it
