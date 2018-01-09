@@ -1,7 +1,13 @@
 #Convert MPIN csv file to useful html report
 import sys
 import csv, itertools
-import jinja2
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+env = Environment(
+    loader=FileSystemLoader('templates'),
+    autoescape=select_autoescape(['html', 'xml'])
+)
+
+personal_report = env.get_template('personal_report.html')
 
 mpin_dict = {'3.0': 'Реден број',
  '3.1': 'ЕМБГ',
@@ -123,7 +129,7 @@ with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='
     gen_info["ЕМБС"] = row[1]
     gen_info["Компанија"] = row[2]
     
-    print(gen_info)
+    #print(gen_info)
     
     #now get the rest of the lines, but not the last four lines
     person_list = []
@@ -136,7 +142,8 @@ with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='
         else:
             break 
             
-    print(person_list)
+    #print(person_list)
 
+print(template.render(person_dict=person_dict))
 
 
