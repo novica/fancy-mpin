@@ -144,6 +144,6 @@ with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='
             
     #print(person_list)
 
-print(template.render(person_dict=person_dict))
+print(personal_report.render(person_dict=person_dict, gen_info=gen_info))
 
 
