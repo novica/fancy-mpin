@@ -14,44 +14,60 @@
     <th>Износ</th>
     </tr>
     <tr>
-    <td></td> <!-- #Бруто плата -->
-    <td></td> 
+    <td>{{ mpin_dict["3.14"] }}</td> <!--Бруто плата-->
+    <td>{{ person_dict["3.14"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Придонес ПИОМ-->
-    <td></td> 
+    <td>{{ mpin_dict["3.15"] }}</td> <!--ПИОМ-->
+    <td>{{ person_dict["3.15"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Придонес ФЗОМ-->
-    <td></td> 
+    <td>{{ mpin_dict["3.16"] }}</td> <!--Доплата ПИОМ -->
+    <td>{{ person_dict["3.16"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Придонес АВРМ-->
-    <td></td> 
+    <td>{{ mpin_dict["3.40"] }}</td> <!--ФЗОМ-->
+    <td>{{ person_dict["3.40"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Дополнителен придонес здравство-->
-    <td></td> 
+    <td>{{ mpin_dict["3.41"] }}</td> <!--Дополнителен ФЗОМ-->
+    <td>{{ person_dict["3.41"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Даночно осободување:-->
-    <td></td> <!--#if gen_info["Часови во месецот"] is not equal to person_dict["3.6"] do some calculations:-->
-              <!--#Даночно ослободување = (Нето + ПДД) - ПДД/10%-->
-
+    <td>{{ mpin_dict["3.42"] }}</td> <!--Професионално ФЗОМ-->
+    <td>{{ person_dict["3.42"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Даночна основица = Бруто - сите придонеси = Нето + ПДД-->
-    <td></td> 
+    <td>{{ mpin_dict["3.43"] }}</td> <!--Дополнително професионално-->
+    <td>{{ person_dict["3.43"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#ПДД-->
-    <td></td> 
+    <td>{{ mpin_dict["3.44"] }}</td> <!--Невработеност-->
+    <td>{{ person_dict["3.44"] }}</td> 
     </tr>
     <tr>
-    <td></td> <!--#Нето плата-->
-    <td></td> 
+    <td>{{ mpin_dict["3.45"] }}</td> <!--Дополнително невработеност-->
+    <td>{{ person_dict["3.45"] }}</td> 
     </tr>
-    <!--#and some other stuff if there are in the data...?-->
+    <td>Даночно осободување</td> <!--Даночно осободување:-->
+    <td>{{ tax_free(person_dict, gen_info) }}</td> 
+    </tr>
+    <tr>
+    <td>Даночна основа</td> <!--Даночна основа = Бруто - сите придонеси = Нето + ПДД-->
+    <td>{{ tax_base(person_dict) }}</td> 
+    </tr>
+    <tr>
+    <td>{{ mpin_dict["3.46"] }}</td>
+    <td>{{ person_dict["3.46"] }}</td> 
+    </tr>
+    <tr>
+    <td>{{ mpin_dict["3.13"] }}</td>
+    <td>{{ person_dict["3.13"] }}</td>         
+    </tr>
+    <tr>
+    <td>Задршки од плата</td> <!--Задршки од плата-->
+    <td>{{ penalties(person_dict) }}</td> 
+    </tr>
     </table> 
     
     <table>

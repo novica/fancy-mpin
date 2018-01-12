@@ -26,7 +26,7 @@ mpin_dict = {'3.0': 'Реден број',
  '3.20': 'Вкупно денови',
  '3.21': 'Основица за стаж со зголемено траење (бенефициран стаж)',
  '3.22': 'Износ на придонес за стаж со зголемено траење (бенефициран стаж)',
- '3.22б': 'Доплата до најниска основица за стаж со злолемено траење (бенефициран стаж)',
+ '3.22б': 'Доплата до најниска основица за стаж со зголемено траење (бенефициран стаж)',
  '3.23': 'Ознака на надлежен органна државна управа обврзник за пресметка и уплата',
  '3.24': 'Часови за кои плаќа надлежен орган',
  '3.25': 'Основица за пресметка на придонеској го плаќа надлежен орган на дежавна управа',
@@ -55,7 +55,6 @@ mpin_dict = {'3.0': 'Реден број',
  '3.7': 'Износ на ефективна работа',
  '3.8': 'Часови за надоместок',
  '3.9': 'Вид на надоместок'}
-
 
 keys_list = ['3.0', '3.1', '3.2', '3.3', '3.4', '3.4б', '3.4ц', '3.5', '3.6', '3.6б', '3.6ц', '3.7', '3.8', '3.9', '3.10',
  '3.12', '3.14', '3.15', '3.16', '3.40', '3.41', '3.42', '3.43', '3.44', '3.45', '3.46', '3.17', '3.17б', '3.18',
@@ -96,7 +95,7 @@ values_list = ['Реден број',
  'Вкупно денови',
  'Основица за стаж со зголемено траење (бенефициран стаж)',
  'Износ на придонес за стаж со зголемено траење (бенефициран стаж)',
- 'Доплата до најниска основица за стаж со злолемено траење (бенефициран стаж)',
+ 'Доплата до најниска основица за стаж со зголемено траење (бенефициран стаж)',
  'Ознака на надлежен органна државна управа обврзник за пресметка и уплата',
  'Часови за кои плаќа надлежен орган',
  'Основица за пресметка на придонес кој го плаќа надлежен орган на дежавна управа',
@@ -109,7 +108,24 @@ values_list = ['Реден број',
  'Ефективна нето плата',
  'Број на трансакциска сметка']
 
-    
+
+
+def tax_free(employee_record, general_information):
+    if general_information["Часови во месецот"] == employee_record["3.6"]:
+        return general_information["Даночно ослободување"]
+    else:
+        return (float(employee_record["3.13"]) + float(employee_record["3.46"])) - float(employee_record["3.46"]/0.1)
+
+def tax_base(employee_record):
+    return (float(employee_record["3.13"]) + float(employee_record["3.46"]) )
+
+def penalties(employee_record):
+    if (float(employee_record["3.13"]) - float(employee_record["3.31"])) != 0:
+        return (float(employee_record["3.13"]) - float(employee_record["3.31"]))
+    else: 
+        return("Нема")
+
+
 with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='cp1251'
     csvreader = csv.reader(csvfile, delimiter=';')
 
@@ -132,18 +148,16 @@ with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='
     #print(gen_info)
     
     #now get the rest of the lines, but not the last four lines
-    person_list = []
+    #person_list = []
     
     while True:
         row = next(csvreader)
         if not len(row) == 1: # len(['***********************************']) == 1
             person_dict = dict(zip(keys_list, row))
-            person_list.append(person_dict) 
+            print(personal_report.render(person_dict=person_dict, gen_info=gen_info, mpin_dict=mpin_dict, tax_free=tax_free, tax_base=tax_base, penalties=penalties))
+            #person_list.append(person_dict) 
         else:
             break 
             
     #print(person_list)
-
-print(personal_report.render(person_dict=person_dict, gen_info=gen_info))
-
-
+    #print(personal_report.render(person_dict=person_dict, gen_info=gen_info, mpin_dict=mpin_dict, tax_free=tax_free, tax_base=tax_base, penalties=penalties))
