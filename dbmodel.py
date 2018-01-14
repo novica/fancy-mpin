@@ -1,6 +1,10 @@
-class EmployeeRecord(db.Model):
+class PayRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    embg = db.Column(db.String(13),  nullable=False)
+    Year = db.Column(db.Integer, nullable=False)
+    Month = db.Column(db.Integer, nullable=False)
+    Hours = db.Column(db.Integer, nullable=False)
+    CompanyId = db.Column(db.Integer, nullable=False)
+    Embg = db.Column(db.String(13),  nullable=False)
     LastName = db.Column(db.String(30),  nullable=False)
     FirstName = db.Column(db.String(30),  nullable=False)
     CompanyUnit = db.Column(db.String(3),  nullable=False)
@@ -27,7 +31,7 @@ class EmployeeRecord(db.Model):
     PDD = db.Column(db.Float,  nullable=False)
     InsuranceCode = db.Column(db.String(4),  nullable=False)
     WaivaerCode = db.Column(db.String(3))
-    InsuranceRate  = db.Column(db.String(1)
+    InsuranceRate  = db.Column(db.String(1))
     FromDay = db.Column(db.String(2))
     ToDay = db.Column(db.String(2)) 
     TotalDays = db.Column(db.Integer)
@@ -45,3 +49,16 @@ class EmployeeRecord(db.Model):
     NetPay = db.Column(db.Float,  nullable=False)
     PayDue = db.Column(db.Float,  nullable=False)
     BankAccount = db.Column(db.Ingeter,  nullable=False)
+
+class CompanyRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ComapnyName = db.Column(db.String(30), nullable=False)
+    EDB = db.Column(db.String(13), nullable=False)
+    EMBS = db.Column(db.String(7), nullable=False)
+
+class Deductions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Year = db.Column(db.Integer, nullable=False)
+    TaxDeductions = db.Column(db.Float,  nullable=False)
+
+
