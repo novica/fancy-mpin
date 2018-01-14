@@ -1,9 +1,10 @@
 class PayRecord(db.Model):
+    _tablename='PayRecord'
     id = db.Column(db.Integer, primary_key=True)
     Year = db.Column(db.Integer, nullable=False)
     Month = db.Column(db.Integer, nullable=False)
     Hours = db.Column(db.Integer, nullable=False)
-    CompanyId = db.Column(db.Integer, nullable=False)
+    CompanyId = db.Column(db.Integer, nullable=False, db.ForeignKey('CompanyRecord.id'))
     Embg = db.Column(db.String(13),  nullable=False)
     LastName = db.Column(db.String(30),  nullable=False)
     FirstName = db.Column(db.String(30),  nullable=False)
@@ -51,12 +52,14 @@ class PayRecord(db.Model):
     BankAccount = db.Column(db.Ingeter,  nullable=False)
 
 class CompanyRecord(db.Model):
+    _tablename='CompanyRecord'
     id = db.Column(db.Integer, primary_key=True)
     ComapnyName = db.Column(db.String(30), nullable=False)
     EDB = db.Column(db.String(13), nullable=False)
     EMBS = db.Column(db.String(7), nullable=False)
 
 class Deductions(db.Model):
+    _tablename='Deductions'
     id = db.Column(db.Integer, primary_key=True)
     Year = db.Column(db.Integer, nullable=False)
     TaxDeductions = db.Column(db.Float,  nullable=False)
