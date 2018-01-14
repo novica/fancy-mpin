@@ -60,5 +60,3 @@ class Deductions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     Year = db.Column(db.Integer, nullable=False)
     TaxDeductions = db.Column(db.Float,  nullable=False)
-
-
