@@ -70,13 +70,4 @@ class Deductions(db.Model):
     __tablename__='Deductions'
     id = db.Column(db.Integer, primary_key=True)
     Year = db.Column(db.Integer, nullable=False)
-    TaxDeductions = db.Column(db.Float, unique=True  nullable=False)
-
-def __repr__(self):
-    return '<PayRecord %r>' % self.EMBG
-
-def __repr__(self):
-    return '<CompanyRecord %r>' % self.EDB
-
-def __repr__(self):
-    return '<Deductions %r>' % self.TaxDeductions
+    TaxDeductions = db.Column(db.Float, unique=True,  nullable=False)
