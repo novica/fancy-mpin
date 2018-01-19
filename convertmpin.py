@@ -122,7 +122,7 @@ def tax_base(employee_record):
 def penalties(employee_record):
     if (float(employee_record["3.13"]) - float(employee_record["3.31"])) != 0:
         return (float(employee_record["3.13"]) - float(employee_record["3.31"]))
-    else: 
+    else:
         return("Нема")
 
 
@@ -131,7 +131,7 @@ with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='
 
     #first three lines contain some genereal info that we need only parts of it
     gen_info={}
-    
+
     row = next(csvreader)
     gen_info["Даночно ослободување"] = row[1]
     gen_info["Часови во месецот"] = row[3]
@@ -139,25 +139,25 @@ with open('dummy-data.txt', newline='\r\n') as csvfile: #don't forget encoding='
     row = next(csvreader)
     gen_info["Месец"] = row[0]
     gen_info["Година"] = row[1]
-   
+
     row = next(csvreader)
     gen_info["ЕДБ"] = row[0]
     gen_info["ЕМБС"] = row[1]
     gen_info["Компанија"] = row[2]
-    
+
     #print(gen_info)
-    
+
     #now get the rest of the lines, but not the last four lines
     #person_list = []
-    
+
     while True:
         row = next(csvreader)
         if not len(row) == 1: # len(['***********************************']) == 1
             person_dict = dict(zip(keys_list, row))
             print(personal_report.render(person_dict=person_dict, gen_info=gen_info, mpin_dict=mpin_dict, tax_free=tax_free, tax_base=tax_base, penalties=penalties))
-            #person_list.append(person_dict) 
+            #person_list.append(person_dict)
         else:
-            break 
-            
+            break
+
     #print(person_list)
     #print(personal_report.render(person_dict=person_dict, gen_info=gen_info, mpin_dict=mpin_dict, tax_free=tax_free, tax_base=tax_base, penalties=penalties))
