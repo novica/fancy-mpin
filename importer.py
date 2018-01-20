@@ -105,7 +105,10 @@ def process_file(filename):
         db.session.add(company)
         db.session.commit()
 
-    #ded = deductions(info)
+    taxdeduction = deductions(info):
+        if not Deductions.query.filename(Deductions.TaxDeductions==info['taxdeduction'].one_or_none():
+        db.session.add(taxdeduction)
+        db.session.commit()
 
     for row in get_all_pay_rows(csvfile):
         p = payrecord(row, info['year'], info['month'], info['hours'], company.id)
